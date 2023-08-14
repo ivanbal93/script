@@ -20,17 +20,19 @@ while True:
             input('Введите URL-адрес таблицы и нажмите "Enter": ')
         )
         ws_titles = [i.title for i in table.worksheets()]
+        
+        if ('Месяц учета оказания услуг' or 'Дата учета оказания услуг')
+            in ws_titles:
         month = table.worksheet('Месяц учета оказания услуг').row_values(1)
         date = table.worksheet('Дата учета оказания услуг').row_values(1)
-
-        if ((('Месяц учета оказания услуг' or 'Дата учета оказания услуг')
-             in ws_titles) and (today in (month or date))):
-            print('''
+    
+            if today in (month or date):
+                print('''
 В отчётах уже есть колонки с сегодняшней датой.
 Их необходимо удалить для корректного анализа Вашей таблицы.
 ''')
-        else:
-            break
+            else:
+                break
 
     except gs.exceptions.NoValidUrlKeyFound:
         print('Введён некорректный URL-адрес.')
